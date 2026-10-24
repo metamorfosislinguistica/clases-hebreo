@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Metaetiquetas para SEO y Redes Sociales (Open Graph) -->
+    <meta name="description" content="Aprende hebreo con Carlos Sánchez Mora. Cursos en línea bajo los estándares del MCER. Enfoque estrictamente académico, literario y neutral.">
+    <meta property="og:title" content="Carlos Sánchez Mora | Profesor de Hebreo y Traductor Literario">
+    <meta property="og:description" content="Estudia hebreo con un enfoque estrictamente académico. Modalidad 100% en línea, dirigido a jóvenes, profesionales y público en general.">
+    <!-- Reemplaza la ruta de abajo con el link de tu foto real para que aparezca en la miniatura -->
+    <meta property="og:image" content="AQUI_PONES_EL_LINK_A_TU_FOTO_REAL.jpg">
+    <meta property="og:url" content="AQUI_PONES_EL_LINK_DE_TU_PAGINA.com">
+    <meta property="og:type" content="website">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <title>Carlos Sánchez Mora | Profesor de Hebreo y Traductor Literario</title>
+    
+    <!-- Tailwind CSS y Fuentes para diseño moderno y académico -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            500: '#334e68',
+                            600: '#243b53',
+                            800: '#102a43',
+                            900: '#0a192f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Tipografía específica y elegante para caracteres hebreos */
+        .hebrew-text {
+            font-family: 'Frank Ruhl Libre', serif;
+            font-size: 1.15em;
+            font-weight: 700;
+        }
+        
+        /* --- MICRO-INTERACCIONES Y ANIMACIONES CSS --- */
+        
+        /* 1. Animaciones de revelado al hacer scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Retrasos escalonados para las tarjetas */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* 2. Subrayado dinámico del menú de escritorio */
+        .nav-link {
+            position: relative;
+            color: #475569; /* text-slate-600 */
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active-link {
+            color: #102a43; /* text-navy-800 */
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 50%;
+            background-color: #102a43;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-link:hover::after, .nav-link.active-link::after {
+            width: 100%;
+        }
+
+        /* 3. Comportamiento del menú al hacer scroll */
+        #main-nav {
+            transition: all 0.3s ease;
+        }
+        .navbar-scrolled {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+        
+        /* Animación suave para el menú móvil */
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            transform-origin: top;
+        }
+        #mobile-menu.hidden {
+            opacity: 0;
+            transform: scaleY(0);
+            pointer-events: none;
+        }
+        #mobile-menu:not(.hidden) {
+            opacity: 1;
+            transform: scaleY(1);
+            pointer-events: auto;
+            display: block; /* Override default hidden class behavior during animation */
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Navegación -->
+    <nav id="main-nav" class="fixed w-full top-0 bg-white/90 backdrop-blur-md border-b border-slate-200 z-50 py-3">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between relative">
+            <span class="text-xl font-bold tracking-tight text-navy-800 cursor-default">Carlos Sánchez Mora<span class="text-slate-500">.</span></span>
+            
+            <!-- Menú de Escritorio (Oculto en móviles) -->
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#sobre-mi" class="nav-link">Semblanza Académica</a>
+                <a href="#metodologia" class="nav-link">Metodología</a>
+                <a href="#cursos" class="nav-link">Oferta Académica</a>
+                <a href="#contacto" class="nav-link">Contacto</a>
+            </div>
+
+            <!-- Botón Hamburguesa (Visible solo en móviles) -->
+            <button id="mobile-btn" class="md:hidden text-navy-800 focus:outline-none p-2 active:scale-95 transition-transform" aria-label="Abrir menú">
+                <i id="mobile-icon" class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-lg">
+            <div class="flex flex-col px-6 py-6 space-y-4 text-center text-base font-medium">
+                <a href="#sobre-mi" class="mobile-link text-slate-600 hover:text-navy-800 active:bg-slate-100 py-3 rounded-lg transition-colors border border-transparent hover:border-slate-200">Semblanza Académica</a>
+                <a href="#metodologia" class="mobile-link text-slate-600 hover:text-navy-800 active:bg-slate-100 py-3 rounded-lg transition-colors border border-transparent hover:border-slate-200">Metodología</a>
+                <a href="#cursos" class="mobile-link text-slate-600 hover:text-navy-800 active:bg-slate-100 py-3 rounded-lg transition-colors border border-transparent hover:border-slate-200">Oferta Académica</a>
+                <a href="#contacto" class="mobile-link bg-navy-800 text-white hover:bg-navy-900 active:scale-95 py-3 rounded-lg transition-all shadow-sm">Contacto</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Héroe / Presentación principal (Con padding extra por el fixed nav) -->
+    <section id="inicio" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 md:pt-40 md:pb-24 grid md:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-navy-50 text-navy-800 mb-4 border border-navy-100">
+                🎓 	ación Universitaria y Rigor Lingüístico
+            </span>
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-950 leading-tight">
+                Estudia hebreo con un enfoque <span class="text-navy-800">estrictamente académico y neutral</span>.
+            </h1>
+            <p class="mt-6 text-lg text-slate-600 leading-relaxed">
+                Dirigido a jóvenes, profesionales y público en general que buscan aprender el idioma bajo los estándares del <strong>Marco Común Europeo de Referencia (MCER)</strong>. Modalidad 100% en línea a través de Zoom, Teams o Google Meet.
+            </p>
+            <div class="mt-6 p-4 bg-slate-100 rounded-lg border-l-4 border-navy-800">
+                <p class="text-sm text-slate-700 font-medium">
+                    <em>Modalidades flexibles: Sesiones personalizadas o grupos reducidos. Contáctame para diseñar tu plan de estudio y consultar horarios.</em>
+                </p>
+            </div>
+            <div class="mt-8 flex flex-wrap gap-4">
+                <a href="#contacto" class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-navy-800 hover:bg-navy-900 shadow-sm hover:shadow-md transition-all active:scale-95">
+                    Solicitar informes de horarios
+                </a>
+                <a href="#cursos" class="inline-flex items-center justify-center px-6 py-3 border border-slate-300 text-base font-medium rounded-lg text-slate-700 bg-white hover:bg-slate-50 transition-all active:scale-95">
+                    Ver oferta académica
+                </a>
+            </div>
+        </div>
+        <div class="relative flex justify-center reveal delay-200">
+            <div class="w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden bg-slate-200 border-4 border-white shadow-xl relative group">
+                <div class="absolute inset-0 bg-gradient-to-tr from-navy-800/20 to-transparent transition-opacity duration-500 group-hover:opacity-0"></div>
+                <!-- Reemplazar con una foto profesional formal -->
+                <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=600&auto=format&fit=crop" alt="Carlos Sánchez Mora" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            </div>
+            <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-navy-100 rounded-full -z-10 mix-blend-multiply filter blur-xl opacity-70"></div>
+        </div>
+    </section>
+
+    <!-- Sobre Mí / Semblanza -->
+    <section id="sobre-mi" class="bg-white border-y border-slate-200 py-16 md:py-24 scroll-mt-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold tracking-tight text-slate-950 text-center mb-12 reveal">Trayectoria y Semblanza Académica</h2>
+            
+            <div class="grid md:grid-cols-12 gap-8 items-start">
+                
+                <!-- Columna Lateral Izquierda Mejorada -->
+                <div class="md:col-span-4 flex flex-col space-y-6">
+                    <div class="bg-navy-50 p-6 rounded-xl border border-navy-100 shadow-sm reveal transition-all hover:shadow-md hover:-translate-y-1">
+                        <h4 class="font-bold text-navy-900 text-sm uppercase tracking-wider mb-3"><i class="fas fa-graduation-cap mr-2"></i> Formación Académica</h4>
+                        <div class="space-y-3 mb-3">
+                            <p class="text-sm text-slate-700 leading-snug border-l-2 border-navy-500 pl-2"><strong>UNAM:</strong> Estudios en la Facultad de Contaduría y Administración.</p>
+                            <p class="text-sm text-slate-700 leading-snug border-l-2 border-navy-500 pl-2"><strong>ENALLT:</strong> Formación integral en el idioma hebreo.</p>
+                        </div>
+                        <hr class="border-navy-100 my-3">
+                        <p class="text-sm text-slate-700"><strong>Especialización:</strong> Cursos en la Universidad Hebrea de Jerusalén y en la Universidad de Tel Aviv.</p>
+                    </div>
+
+                    <div class="bg-navy-50 p-6 rounded-xl border border-navy-100 shadow-sm reveal delay-100 transition-all hover:shadow-md hover:-translate-y-1">
+                        <h4 class="font-bold text-navy-900 text-sm uppercase tracking-wider mb-3"><i class="fas fa-laptop-code mr-2"></i> Pedagogía Digital (CUAIEED)</h4>
+                        <p class="text-xs text-slate-600 mb-3 font-medium">Programas del Programa Formación de Becarios CUAIEED-UNAM acreditados:</p>
+                        <ul class="text-xs text-slate-700 space-y-2 list-disc pl-4">
+                            <li>Diplomado Competencias Docentes para la Era Digital.</li>
+                            <li>Diplomado Alfabetizaciones Digitales para la Educación en Ambientes Abiertos y a Distancia.</li>
+                            <li>Seminario Innovación para la Educación en Ambientes Abiertos y a Distancia.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-navy-50 p-6 rounded-xl border border-navy-100 shadow-sm reveal delay-200 transition-all hover:shadow-md hover:-translate-y-1">
+                        <h4 class="font-bold text-navy-900 text-sm uppercase tracking-wider mb-3"><i class="fas fa-book-open mr-2"></i> Traducción Literaria</h4>
+                        <p class="text-sm text-slate-700">Galardonado con el 1er Lugar en el Concurso de Traducción de Poesía 1x1 (Periódico de Poesía UNAM, Casa del Lago y Círculo de Traductores).</p>
+                    </div>
+                </div>
+                
+                <!-- Cuerpo Principal de la Semblanza -->
+                <div class="md:col-span-8 prose prose-slate max-w-none text-slate-600 text-[1.05rem] leading-relaxed text-justify reveal delay-100">
+                    <p>
+                        Realizó sus estudios de nivel superior en la Facultad de Contaduría y Administración de la Universidad Nacional Autónoma de México (UNAM), formándose paralelamente en el idioma hebreo a través de la <strong>Escuela Nacional de Lenguas, Lingüística y Traducción (ENALLT)</strong>. Complementa su perfil con certificaciones internacionales especializadas, habiendo cursado los programas <em>“Modern Hebrew Poetry”</em> por la Universidad Hebrea de Jerusalén y <em>“The History of Modern Israel”</em> por la Universidad de Tel Aviv.
+                    </p>
+                    <p>
+                        En el ámbito de la traducción literaria, fue galardonado con el <strong>Primer Lugar en el Concurso Internacional de Traducción de Poesía 1x1</strong> —certamen promovido por el Periódico de Poesía de la Dirección de Literatura de la UNAM, la Casa del Lago y el Círculo de Traductores— por su versión al español del poema <em>“Canción de cuna”</em> de Natán Alterman. Asimismo, colaboró con el Programa Universitario de Estudios sobre Democracia, Justicia y Sociedad (PUEDJS-UNAM) mediante la publicación de la traducción del poema <em>“¿De qué manera?”</em> de Amir Or, <strong>realizada con la autorización del poeta</strong>, en la revista universitaria ¡GOOOYA!.
+                    </p>
+                    <p>
+                        Su práctica docente se fundamenta sólidamente en metodologías para entornos virtuales. Como miembro del Programa Formación de Becarios de la <strong>Coordinación de Universidad Abierta, Innovación Educativa y Educación a Distancia (CUAIEED)</strong> de la UNAM, acreditó el <em>Diplomado Competencias Docentes para la Era Digital</em>, el <em>Diplomado Alfabetizaciones Digitales para la Educación en Ambientes Abiertos y a Distancia</em>, así como el <em>Seminario Innovación para la Educación en Ambientes Abiertos y a Distancia</em> del mismo programa.
+                    </p>
+                    <p>
+                        Como parte de su compromiso con el aprendizaje autogestivo y la innovación educativa, realizó sus prácticas profesionales contribuyendo al desarrollo y consolidación del portal institucional <strong>Recursos para el Aprendizaje Autónomo</strong> (difundido a través de Gaceta UNAM), plataforma orientada a profesores y alumnos. Esta sólida experiencia académica e institucional le permite estructurar y dirigir sesiones en línea que fomentan la autonomía, el rigor crítico y la excelencia en el dominio del idioma.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Oferta Académica -->
+    <section id="cursos" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 scroll-mt-16">
+        <div class="text-center mb-16 reveal">
+            <h2 class="text-3xl font-bold tracking-tight text-navy-800 mb-4">Oferta Académica (En Línea)</h2>
+            <p class="text-slate-600 max-w-2xl mx-auto text-lg">Cursos de lengua diseñados bajo un estricto rigor académico, equivalentes al Marco Común Europeo de Referencia (MCER). Plataformas: Zoom, Teams o Google Meet.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Alef -->
+            <div class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal">
+                <div class="bg-navy-800 p-5 text-white text-center transition-colors duration-300 group-hover:bg-navy-900">
+                    <h3 class="text-xl font-bold mb-1">Hebreo: Alef (<span class="hebrew-text">א</span>)</h3>
+                    <span class="inline-block px-3 py-1 bg-navy-600 rounded-full text-[10px] font-semibold tracking-wide">NIVEL A1 - ACCESO</span>
+                </div>
+                <div class="p-5 flex-grow flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm mb-4">
+                        Iniciación absoluta. Aprendizaje del alfabeto, fonética, lectura, escritura y bases fundamentales de la gramática hebrea moderna.
+                    </p>
+                    <a href="#contacto" class="mt-auto block text-center w-full py-2 border border-navy-800 text-navy-800 font-semibold rounded-lg hover:bg-navy-50 transition-colors text-sm active:scale-95">
+                        Informes de Horarios <span class="inline-block transition-transform duration-300 transform translate-x-0 group-hover:translate-x-1 ml-1">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bet -->
+            <div class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal delay-100">
+                <div class="bg-navy-800 p-5 text-white text-center transition-colors duration-300 group-hover:bg-navy-900">
+                    <h3 class="text-xl font-bold mb-1">Hebreo: Bet (<span class="hebrew-text">ב</span>)</h3>
+                    <span class="inline-block px-3 py-1 bg-navy-600 rounded-full text-[10px] font-semibold tracking-wide">NIVEL A2 - BÁSICO</span>
+                </div>
+                <div class="p-5 flex-grow flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm mb-4">
+                        Consolidación de estructuras primarias. Enfoque en expansión de vocabulario, conjugaciones y comprensión de textos cotidianos.
+                    </p>
+                    <a href="#contacto" class="mt-auto block text-center w-full py-2 border border-navy-800 text-navy-800 font-semibold rounded-lg hover:bg-navy-50 transition-colors text-sm active:scale-95">
+                        Informes de Horarios <span class="inline-block transition-transform duration-300 transform translate-x-0 group-hover:translate-x-1 ml-1">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Guimel -->
+            <div class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-xl relative reveal delay-200">
+                <div class="bg-navy-900 p-5 text-white text-center">
+                    <h3 class="text-xl font-bold mb-1">Hebreo: Guimel (<span class="hebrew-text">ג</span>)</h3>
+                    <span class="inline-block px-3 py-1 bg-navy-600 rounded-full text-[10px] font-semibold tracking-wide">NIVEL B1 - INTERMEDIO</span>
+                </div>
+                <div class="p-5 flex-grow flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm mb-4">
+                        Sintaxis compleja y fluidez conversacional. Análisis de textos literarios y periodísticos para dominio independiente del idioma.
+                    </p>
+                    <a href="#contacto" class="mt-auto block text-center w-full py-2 bg-navy-800 text-white font-semibold rounded-lg hover:bg-navy-950 transition-colors text-sm active:scale-95">
+                        Informes de Horarios <span class="inline-block transition-transform duration-300 transform translate-x-0 group-hover:translate-x-1 ml-1">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Yiddish -->
+            <div class="group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-xl reveal delay-300">
+                <div class="bg-slate-800 p-5 text-white text-center relative transition-colors duration-300 group-hover:bg-slate-900">
+                    <div class="absolute top-0 right-0 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-bl-lg">REQUISITO A1</div>
+                    <h3 class="text-xl font-bold mb-1">Taller de Yiddish</h3>
+                    <span class="inline-block px-3 py-1 bg-slate-600 rounded-full text-[10px] font-semibold tracking-wide">PRINCIPIANTE</span>
+                </div>
+                <div class="p-5 flex-grow flex flex-col justify-between">
+                    <p class="text-slate-600 text-sm mb-4">
+                        Estudio introductorio de la lengua. Exige contar previamente con el Nivel Alef (A1) de hebreo para facilitar la fonética y escritura.
+                    </p>
+                    <a href="#contacto" class="mt-auto block text-center w-full py-2 border border-slate-800 text-slate-800 font-semibold rounded-lg hover:bg-slate-50 transition-colors text-sm active:scale-95">
+                        Informes de Horarios <span class="inline-block transition-transform duration-300 transform translate-x-0 group-hover:translate-x-1 ml-1">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metodología -->
+    <section id="metodologia" class="bg-slate-100 max-w-none px-4 sm:px-6 lg:px-8 py-16 md:py-24 border-y border-slate-200 scroll-mt-16">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold tracking-tight text-navy-800 text-center mb-12 reveal">Pedagogía y Modalidad de Trabajo</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm reveal transition-shadow hover:shadow-md group">
+                    <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center text-navy-800 mb-4 font-bold text-xl transition-transform duration-300 group-hover:scale-110 group-hover:bg-navy-800 group-hover:text-white"><i class="fas fa-laptop-house"></i></div>
+                    <h3 class="text-lg font-bold text-slate-950 mb-2">Entorno Digital Optimizado</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Las clases se desarrollan a distancia apoyadas en mi formación por la CUAIEED-UNAM, promoviendo el aprendizaje autónomo mediante plataformas virtuales.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm reveal delay-100 transition-shadow hover:shadow-md group">
+                    <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center text-navy-800 mb-4 font-bold text-xl transition-transform duration-300 group-hover:scale-110 group-hover:bg-navy-800 group-hover:text-white"><i class="fas fa-university"></i></div>
+                    <h3 class="text-lg font-bold text-slate-950 mb-2">Neutralidad y Rigor</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">El aprendizaje se aborda desde una perspectiva estrictamente lingüística, literaria y secular, con la seriedad de una institución académica de alto nivel.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm reveal delay-200 transition-shadow hover:shadow-md group">
+                    <div class="w-10 h-10 rounded-lg bg-navy-50 flex items-center justify-center text-navy-800 mb-4 font-bold text-xl transition-transform duration-300 group-hover:scale-110 group-hover:bg-navy-800 group-hover:text-white"><i class="fas fa-users-cog"></i></div>
+                    <h3 class="text-lg font-bold text-slate-950 mb-2">Flexibilidad de Formato</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Diseño el plan de estudio según tus objetivos universitarios o profesionales (público en general), ofreciendo sesiones particulares o en grupos muy reducidos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario / Contacto -->
+    <section id="contacto" class="bg-navy-900 text-white py-16 md:py-24 scroll-mt-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl font-bold tracking-tight mb-4">¿Te interesa comenzar?</h2>
+                <p class="text-navy-100 text-lg">Contáctame para solicitar el temario, consultar informes de horarios y diseñar el plan que mejor se adapte a ti.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-center bg-white rounded-2xl p-8 shadow-xl text-slate-800 reveal delay-100">
+                
+                <!-- Formulario Web3Forms -->
+                <form action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+    <!-- REEMPLAZA ESTO CON LA CLAVE QUE TE LLEGÓ AL CORREO -->
+    <input type="hidden" name="access_key" value="58e477ef-ed19-49c6-b7e8-d2058f700bb3">
+    
+    <input type="hidden" name="subject" value="Nuevo prospecto para clases de idioma">
+    <input type="hidden" name="from_name" value="Landing Page Carlos Sánchez">
+    <!-- Esto permite que al darle "Responder" en tu correo, le contestes directamente al alumno -->
+    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+    <div>
+        <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Nombre completo</label>
+        <input type="text" name="name" id="name" required class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-navy-500 focus:ring-navy-500 bg-slate-50 p-2.5 border transition-colors">
+    </div>
+    
+    <div>
+        <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Correo electrónico</label>
+        <input type="email" name="email" id="email" required class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-navy-500 focus:ring-navy-500 bg-slate-50 p-2.5 border transition-colors">
+    </div>
+    
+    <div>
+        <label for="course" class="block text-sm font-medium text-slate-700 mb-1">Nivel de interés</label>
+        <select name="course" id="course" required class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-navy-500 focus:ring-navy-500 bg-slate-50 p-2.5 border transition-colors">
+            <option value="" disabled selected>Selecciona una opción...</option>
+            <option value="Hebreo_Alef">Hebreo: Alef (Nivel A1)</option>
+            <option value="Hebreo_Bet">Hebreo: Bet (Nivel A2)</option>
+            <option value="Hebreo_Guimel">Hebreo: Guimel (Nivel B1)</option>
+            <option value="Yiddish">Taller de Yiddish</option>
+        </select>
+    </div>
+
+    <!-- NUEVA CAJA DE MENSAJE -->
+    <div>
+        <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Mensaje o dudas (Opcional)</label>
+        <textarea name="message" id="message" rows="3" class="block w-full rounded-lg border-slate-300 shadow-sm focus:border-navy-500 focus:ring-navy-500 bg-slate-50 p-2.5 border transition-colors" placeholder="Cuéntame tu experiencia previa, dudas o disponibilidad de horarios..."></textarea>
+    </div>
+    
+    <button type="submit" class="w-full flex justify-center py-3 px-4 rounded-lg shadow-sm text-sm font-bold text-white bg-navy-800 hover:bg-navy-900 transition-all active:scale-95">
+        Solicitar Informes
+    </button>
+</form>
+
+                <!-- Opción de WhatsApp y Correo -->
+                <div class="text-center border-t md:border-t-0 md:border-l border-slate-200 pt-8 md:pt-0 md:pl-8 h-full flex flex-col justify-center space-y-6">
+                    <div>
+                        <p class="text-slate-600 mb-3 text-sm font-medium">Atención inmediata vía WhatsApp</p>
+                        <a href="https://wa.me/525530709738?text=Hola,%20Carlos.%20Me%20interesa%20solicitar%20informes%20de%20horarios%20para%20los%20cursos%20de%20idiomas." target="_blank" class="inline-flex items-center gap-3 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 font-bold text-white rounded-xl transition-all shadow-md hover:-translate-y-1 active:scale-95 w-full justify-center">
+                            <i class="fab fa-whatsapp text-2xl"></i>
+                            Enviar Mensaje
+                        </a>
+                    </div>
+                    <div>
+                        <p class="text-slate-600 mb-3 text-sm font-medium">O escríbeme directamente al correo:</p>
+                        <a href="mailto:metamorfosislinguistica@gmail.com" class="text-navy-700 font-semibold hover:text-navy-900 transition-colors flex items-center justify-center gap-2">
+                            <i class="far fa-envelope"></i> metamorfosislinguistica@gmail.com
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-500">
+        <p>&copy; <span id="current-year"></span> Carlos Sánchez Mora. Todos los derechos reservados. | Creado para perfil académico.</p>
+    </footer>
+
+    <!-- SCRIPTS JS PARA INTERACCIONES -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Actualizar el año automáticamente en el footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // --- Lógica del Menú Móvil (Hamburguesa) ---
+            const mobileBtn = document.getElementById('mobile-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileIcon = document.getElementById('mobile-icon');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            // Abrir/Cerrar menú al dar clic al botón
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if(mobileMenu.classList.contains('hidden')){
+                    mobileIcon.classList.remove('fa-times');
+                    mobileIcon.classList.add('fa-bars');
+                } else {
+                    mobileIcon.classList.remove('fa-bars');
+                    mobileIcon.classList.add('fa-times');
+                }
+            });
+
+            // Cerrar el menú automáticamente cuando se hace clic en un enlace
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileIcon.classList.remove('fa-times');
+                    mobileIcon.classList.add('fa-bars');
+                });
+            });
+
+            // --- Animaciones de entrada al hacer Scroll (Intersection Observer) ---
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Dejamos de observar una vez que ya apareció
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, {
+                root: null,
+                threshold: 0.1, // Activa cuando el 10% del elemento es visible
+                rootMargin: "0px 0px -50px 0px" // Le da un pequeño margen de aparición
+            });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // --- Comportamiento del Menú Inteligente al hacer scroll ---
+            const nav = document.getElementById('main-nav');
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            window.addEventListener('scroll', () => {
+                
+                // Reducir barra de navegación y dar sombra al bajar
+                if (window.scrollY > 50) {
+                    nav.classList.add('navbar-scrolled');
+                } else {
+                    nav.classList.remove('navbar-scrolled');
+                }
+
+                // Resaltar el enlace activo según la sección en pantalla
+                let currentSection = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    // Ajuste para detectar la sección un poco antes de llegar
+                    if (scrollY >= (sectionTop - 200)) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active-link');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active-link');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
